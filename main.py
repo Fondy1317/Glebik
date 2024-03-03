@@ -91,7 +91,7 @@ class gleb():
             elif ChoiceM == 2:
                 d = random.randint(0,10)
                 if d != 10:
-                    print('Удача! Вам удалось подзаработать!')
+                    print('Удача! Вам удалось подзаработать!!')
                     self.money += 200 * self.lvl * 0.5
                     self.delo()
                 else:
