@@ -23,9 +23,9 @@ class gleb():
             else:
                 break
     def delo(self):
-        self.hp -= 20
-        self.hapiness -= 20
-        self.feed -= 20
+        self.hp -= 10
+        self.hapiness -= 10
+        self.feed -= self.weight*0.1
         self.exp += 10 + int(self.lvl // 10)
         if self.exp == self.lvl * 10:
             self.lvl += 1
