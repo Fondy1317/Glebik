@@ -10,16 +10,19 @@ class gleb():
         self.lvl = 1
         self.exp = 0
         self.passivemoney = 0
+        self.passivehp = 0
+        self.passivehappy = 0
+        self.passivefood = 0
 
     def dela(self):
         while True:
             ChoiceD = int(input(f'--------------\nТекуший Голод - {self.feed}, Утолить голод - 1\nТекущее Здоровье - {self.hp},восполнить здоровье - 2\nТекущее Счастье - {self.hapiness},восполнить счастье - 3\nВернуться в меню - 4\n-------------\nВаш выбор - '))
             if ChoiceD == 1:
-                self.find_food()
+                self.plus_food()
             elif ChoiceD == 2:
-                self.sleep()
+                self.plus_hp()
             elif ChoiceD == 3:
-                self.fart_public()
+                self.plus_happy()
             else:
                 break
     def delo(self):
@@ -36,25 +39,30 @@ class gleb():
         if self.feed <= 0 or self.hp <= 0 or self.hapiness <= 0:
             self.death()
         self.money += self.passivemoney
+        self.hp += self.passivehp
+        self.hapiness += self.passivehappy
+        self.feed += self.passivefood
 
-    def sleep(self):
+    def plus_hp(self):
         self.delo()
         self.hp += 50
-    def fart_public(self):
+    def plus_happy(self):
         self.delo()
         self.hapiness += 50
-    def find_food(self):
+    def plus_food(self):
         self.delo()
         self.feed += 50
     def menu(self):
         while True:
-            ChoiceM = int(input(f'--------------\nПриветствуем в Истории {self.name}!\nПерейти к делам {self.name} - 1\nПерейти в статистику - 2\nЗаработать денег - 3\nВаш выбор - '))
+            ChoiceM = int(input(f'--------------\nПриветствуем в Истории {self.name}!\nПерейти к делам {self.name} - 1\nПерейти в статистику - 2\nЗаработать денег - 3\nКупить компании - 4\nВаш выбор - '))
             if ChoiceM == 1:
                 self.dela()
             elif ChoiceM == 2:
                 self.stats()
             elif ChoiceM == 3:
                 self.makemoney()
+            elif ChoiceM == 4:
+                self.passivesmth()
     def stats(self):
         print(f'--------------\nУровень {self.name} - {self.lvl}\nЕго вес - {self.weight}\nЕго количество денег - {self.money}')
     def brick(self):
@@ -83,7 +91,7 @@ class gleb():
         exit()
     def makemoney(self):
         while True:
-            ChoiceM = int(input(f'--------------\nКак будете зарабатывать деньги?\nРаботать - 1\nКриминал - 2\nКупить бизнес - 3\nВыйти в меню - 4\nВаш выбор - '))
+            ChoiceM = int(input(f'--------------\nКак будете зарабатывать деньги?\nРаботать - 1\nКриминал - 2\nВыйти в меню - 4\nВаш выбор - '))
             if ChoiceM == 1:
                 print('Вы поработали на славу!')
                 self.money += 100 * self.lvl *0.5
@@ -97,18 +105,31 @@ class gleb():
                 else:
                     print('Неудача!Вас загребли, пришлось дать взятку что стоило вам половину вашего состояния!')
                     self.money = self.money * 0.5
-            elif ChoiceM == 3:
-                ChoiceB = int(input('--------------\nКупить Ларёк(10.000р) - 1\nКупить Маленький магазинчик(75.000) -2\nНичего не покупать - 3'))
-                if ChoiceB == 1 and self.money >= 10000:
-                    self.money -= 10000
-                    self.passivemoney += 100
-                    self.delo()
-                if ChoiceB == 2 and self.money >= 75000:
-                    self.money -= 75000
-                    self.passivemoney += 1000
-                    self.delo()
             elif ChoiceM == 4:
                 break
+    def passivesmth(self):
+        ChoiceP = int(input(f'--------------\nЧто хотите сделать?\nКупить личную сеть ресторанов(пассивная сытость каждое действие, 50.000p) - 1\nКупить премиум абонемент в платную клинику(пассивное здоровье каждое действие, 65.000p) - 2\nКупить цирк - 3(пассивное счастье каждое действие, 30.000p)\nКупить бизнес - 4'))
+        if ChoiceP == 1 and self.money >= 50000:
+            self.money -= 50000
+            self.passivefood += 20
+        elif ChoiceP == 2 and self.money >= 65000:
+            self.money -= 65000
+            self.passivehp += 20
+        elif ChoiceP == 3 and self.money >= 30000:
+            self.money -= 30000
+            self.passivehappy += 20
+        elif ChoiceP == 4:
+            ChoiceB = int(input(
+                '--------------\nКупить Ларёк(10.000р) - 1\nКупить Маленький магазинчик(75.000) -2\nНичего не покупать - 3'))
+            if ChoiceB == 1 and self.money >= 10000:
+                self.money -= 10000
+                self.passivemoney += 100
+                self.delo()
+            if ChoiceB == 2 and self.money >= 75000:
+                self.money -= 75000
+                self.passivemoney += 1000
+                self.delo()
+
 
 gleb = gleb('glebik')
 gleb.menu()
